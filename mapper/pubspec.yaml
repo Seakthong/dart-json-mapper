@@ -10,7 +10,7 @@ dependencies:
   analyzer: ^7.7.0
   build: ^2.4.1
   build_config: ^1.1.1
-  intl: ^0.19.0
+  intl: ^0.20.2
   meta: ^1.17.0
   path: ^1.8.3
   reflectable: ^4.0.15
