@@ -11,7 +11,7 @@ dependencies:
   build: ^2.4.1
   build_config: ^1.1.1
   intl: ^0.20.2
-  meta: ^1.17.0
+  meta: ^1.16.0
   path: ^1.8.3
   reflectable: ^4.0.15
   collection: ^1.18.0
