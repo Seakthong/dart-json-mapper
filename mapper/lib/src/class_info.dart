@@ -12,7 +12,9 @@ class ClassInfo {
   Map<Type, ClassInfo>? cachedClasses;
 
   factory ClassInfo.fromCache(
-      ClassMirror classMirror, Map<Type, ClassInfo>? cache) {
+    ClassMirror classMirror,
+    Map<Type, ClassInfo>? cache,
+  ) {
     final type = _getReflectedType(classMirror);
 
     if (cache != null && type != null) {
@@ -34,47 +36,62 @@ class ClassInfo {
   final Map<DeclarationMirror, List<Object>> _cacheLookupDeclarationMetaData =
       {};
 
-  Json? getMeta([dynamic scheme]) => _metaData.firstWhereOrNull((m) =>
-      m is Json &&
-      ((scheme != null && m.scheme == scheme) ||
-          (scheme == null && m.scheme == null))) as Json?;
+  Json? getMeta([dynamic scheme]) =>
+      _metaData.firstWhereOrNull(
+            (m) =>
+                m is Json &&
+                ((scheme != null && m.scheme == scheme) ||
+                    (scheme == null && m.scheme == null)),
+          )
+          as Json?;
 
   Json? getMetaWhere(Function whereFunction, [dynamic scheme]) =>
-      _metaData.firstWhereOrNull((m) =>
-          m is Json &&
-          whereFunction(m) == true &&
-          ((scheme != null && m.scheme == scheme) ||
-              (scheme == null && m.scheme == null))) as Json?;
+      _metaData.firstWhereOrNull(
+            (m) =>
+                m is Json &&
+                whereFunction(m) == true &&
+                ((scheme != null && m.scheme == scheme) ||
+                    (scheme == null && m.scheme == null)),
+          )
+          as Json?;
 
   JsonProperty? getDeclarationMeta(DeclarationMirror dm, [dynamic scheme]) =>
       getLastDeclarationMeta(dm, scheme);
 
-  List<JsonProperty> getAllDeclarationMeta(DeclarationMirror dm,
-          [dynamic scheme]) =>
-      lookupDeclarationMetaData(dm)
-          .where((m) =>
-              m is JsonProperty &&
-              ((scheme != null && m.scheme == scheme) ||
-                  (scheme == null && m.scheme == null)))
-          .toList()
-          .cast<JsonProperty>();
+  List<JsonProperty> getAllDeclarationMeta(
+    DeclarationMirror dm, [
+    dynamic scheme,
+  ]) => lookupDeclarationMetaData(dm)
+      .where(
+        (m) =>
+            m is JsonProperty &&
+            ((scheme != null && m.scheme == scheme) ||
+                (scheme == null && m.scheme == null)),
+      )
+      .toList()
+      .cast<JsonProperty>();
 
-  JsonProperty? getLastDeclarationMeta(DeclarationMirror dm,
-          [dynamic scheme]) =>
-      lookupDeclarationMetaData(dm)
-          .reversed
-          .where((m) =>
-              m is JsonProperty &&
-              ((scheme != null && m.scheme == scheme) ||
-                  (scheme == null && m.scheme == null)))
-          .cast<JsonProperty>()
-          .firstOrNull;
+  JsonProperty? getLastDeclarationMeta(
+    DeclarationMirror dm, [
+    dynamic scheme,
+  ]) => lookupDeclarationMetaData(dm).reversed
+      .where(
+        (m) =>
+            m is JsonProperty &&
+            ((scheme != null && m.scheme == scheme) ||
+                (scheme == null && m.scheme == null)),
+      )
+      .cast<JsonProperty>()
+      .firstOrNull;
 
   JsonConstructor? hasConstructorMeta(DeclarationMirror dm, [dynamic scheme]) =>
-      lookupDeclarationMetaData(dm).firstWhereOrNull((m) =>
-          m is JsonConstructor &&
-          ((scheme != null && m.scheme == scheme) ||
-              (scheme == null && m.scheme == null))) as JsonConstructor?;
+      lookupDeclarationMetaData(dm).firstWhereOrNull(
+            (m) =>
+                m is JsonConstructor &&
+                ((scheme != null && m.scheme == scheme) ||
+                    (scheme == null && m.scheme == null)),
+          )
+          as JsonConstructor?;
 
   List<Object> get _metaData {
     return lookupClassMetaData(classMirror);
@@ -85,19 +102,22 @@ class ClassInfo {
     try {
       result =
           classMirror.declarations.values.firstWhere((DeclarationMirror dm) {
-        String? returnType;
-        try {
-          returnType = dm is MethodMirror ? dm.returnType.simpleName : null;
-        } catch (error) {
-          returnType = null;
-        }
-        return dm is MethodMirror &&
-            !dm.isPrivate &&
-            !dm.isConstructor &&
-            returnType == 'void' &&
-            getDeclarationMeta(dm, scheme) != null &&
-            getDeclarationMeta(dm, scheme)!.name == name;
-      }) as MethodMirror?;
+                String? returnType;
+                try {
+                  returnType = dm is MethodMirror
+                      ? dm.returnType.simpleName
+                      : null;
+                } catch (error) {
+                  returnType = null;
+                }
+                return dm is MethodMirror &&
+                    !dm.isPrivate &&
+                    !dm.isConstructor &&
+                    returnType == 'void' &&
+                    getDeclarationMeta(dm, scheme) != null &&
+                    getDeclarationMeta(dm, scheme)!.name == name;
+              })
+              as MethodMirror?;
     } catch (error) {
       result = null;
     }
@@ -127,7 +147,9 @@ class ClassInfo {
 
   /// Returns all subtypes of [classInfo], this is transitive
   static List<ClassInfo> getAllSubTypes(
-      Map<Type, ClassInfo> classes, ClassInfo classInfo) {
+    Map<Type, ClassInfo> classes,
+    ClassInfo classInfo,
+  ) {
     final result = <ClassInfo>[];
     for (final subType in classes.values) {
       try {
@@ -145,17 +167,19 @@ class ClassInfo {
       getJsonSetter(null, scheme);
 
   void enumerateJsonGetters(Function visitor, [dynamic scheme]) {
-    classMirror.declarations.values.where((DeclarationMirror dm) {
-      return !dm.isPrivate &&
-          dm is MethodMirror &&
-          !dm.isConstructor &&
-          dm.isRegularMethod &&
-          dm.parameters.isEmpty &&
-          getDeclarationMeta(dm, scheme) != null &&
-          getDeclarationMeta(dm, scheme)!.name != null;
-    }).forEach((DeclarationMirror dm) {
-      visitor(dm, getDeclarationMeta(dm, scheme));
-    });
+    classMirror.declarations.values
+        .where((DeclarationMirror dm) {
+          return !dm.isPrivate &&
+              dm is MethodMirror &&
+              !dm.isConstructor &&
+              dm.isRegularMethod &&
+              dm.parameters.isEmpty &&
+              getDeclarationMeta(dm, scheme) != null &&
+              getDeclarationMeta(dm, scheme)!.name != null;
+        })
+        .forEach((DeclarationMirror dm) {
+          visitor(dm, getDeclarationMeta(dm, scheme));
+        });
   }
 
   MethodMirror? getJsonAnyGetter([dynamic scheme]) {
@@ -163,14 +187,16 @@ class ClassInfo {
     try {
       result =
           classMirror.declarations.values.firstWhere((DeclarationMirror dm) {
-        return !dm.isPrivate &&
-            dm is MethodMirror &&
-            !dm.isConstructor &&
-            dm.parameters.isEmpty &&
-            dm.hasReflectedReturnType &&
-            dm.reflectedReturnType.toString() == 'Map<String, dynamic>' &&
-            getDeclarationMeta(dm, scheme) != null;
-      }) as MethodMirror?;
+                return !dm.isPrivate &&
+                    dm is MethodMirror &&
+                    !dm.isConstructor &&
+                    dm.parameters.isEmpty &&
+                    dm.hasReflectedReturnType &&
+                    dm.reflectedReturnType.toString() ==
+                        'Map<String, dynamic>' &&
+                    getDeclarationMeta(dm, scheme) != null;
+              })
+              as MethodMirror?;
     } catch (error) {
       result = null;
     }
@@ -180,36 +206,52 @@ class ClassInfo {
   MethodMirror? getJsonConstructor([dynamic scheme]) {
     MethodMirror? result;
     try {
-      result = classMirror.declarations.values
-          .firstWhereOrNull((DeclarationMirror dm) {
-        return !dm.isPrivate &&
-            dm is MethodMirror &&
-            dm.isConstructor &&
-            hasConstructorMeta(dm, scheme) != null;
-      }) as MethodMirror?;
+      result =
+          classMirror.declarations.values.firstWhereOrNull((
+                DeclarationMirror dm,
+              ) {
+                return !dm.isPrivate &&
+                    dm is MethodMirror &&
+                    dm.isConstructor &&
+                    hasConstructorMeta(dm, scheme) != null;
+              })
+              as MethodMirror?;
     } catch (error) {
       result = null;
     }
 
     return result ??
-        classMirror.declarations.values
-            .firstWhereOrNull((DeclarationMirror dm) {
-          return !dm.isPrivate && dm is MethodMirror && dm.isConstructor;
-        }) as MethodMirror?;
+        classMirror.declarations.values.firstWhereOrNull((
+              DeclarationMirror dm,
+            ) {
+              return !dm.isPrivate && dm is MethodMirror && dm.isConstructor;
+            })
+            as MethodMirror?;
   }
 
   List<String> get publicFieldNames {
     final instanceMembers = classMirror.instanceMembers;
-    return instanceMembers.values
-        .where((MethodMirror method) {
-          return !method.isPrivate &&
-              (method.isGetter &&
-                  (method.isSynthetic ||
-                      _isPublicGetter(method) ||
-                      _isGetterAndSetter(method, classMirror)));
-        })
-        .map((MethodMirror method) => method.simpleName)
-        .toList();
+    final methods = instanceMembers.values.where((MethodMirror method) {
+      return !method.isPrivate &&
+          (method.isGetter &&
+              (method.isSynthetic ||
+                  _isPublicGetter(method) ||
+                  _isGetterAndSetter(method, classMirror)));
+    }).toList()..sort(_comparePublicGetters);
+    return methods.map((MethodMirror method) => method.simpleName).toList();
+  }
+
+  int _comparePublicGetters(MethodMirror first, MethodMirror second) {
+    final firstFieldLike = _isFieldLikeGetter(first);
+    final secondFieldLike = _isFieldLikeGetter(second);
+    if (firstFieldLike == secondFieldLike) {
+      return 0;
+    }
+    return firstFieldLike ? -1 : 1;
+  }
+
+  bool _isFieldLikeGetter(MethodMirror method) {
+    return method.isSynthetic || _isGetterAndSetter(method, classMirror);
   }
 
   static const Set<String> _builtinPublicGetters = {'hashCode', 'runtimeType'};
@@ -287,19 +329,21 @@ class ClassInfo {
     for (final element in [
       parentClassMirror,
       _safeGetSuperClassMirror(parentClassMirror),
-      ...parentClassMirror.superinterfaces
+      ...parentClassMirror.superinterfaces,
     ]) {
       if (element == null) {
         continue;
       }
-      final parentDeclarationMirror =
-          ClassInfo.fromCache(element, cachedClasses)
-              .getDeclarationMirror(declarationMirror.simpleName);
-      result = result +
+      final parentDeclarationMirror = ClassInfo.fromCache(
+        element,
+        cachedClasses,
+      ).getDeclarationMirror(declarationMirror.simpleName);
+      result =
+          result +
           (parentClassMirror.isTopLevel
               ? parentDeclarationMirror != null
-                  ? parentDeclarationMirror.metadata
-                  : []
+                    ? parentDeclarationMirror.metadata
+                    : []
               : lookupDeclarationMetaData(parentDeclarationMirror));
     }
 
@@ -327,8 +371,10 @@ class ClassInfo {
     }
     if (result == null) {
       try {
-        classMirror.instanceMembers
-            .forEach((memberName, MethodMirror methodMirror) {
+        classMirror.instanceMembers.forEach((
+          memberName,
+          MethodMirror methodMirror,
+        ) {
           if (memberName == name) {
             result = methodMirror;
           }

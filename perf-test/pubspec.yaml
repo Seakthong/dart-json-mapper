@@ -9,23 +9,24 @@ description: >
   And unit tests for DartJsonMapper
 homepage: https://github.com/k-paxian/dart-json-mapper/perf-test
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.12.0 <4.0.0'
 dependencies:
   dart_json_mapper:
-  json_annotation: ^4.7.0
+  json_annotation: ^4.12.0
   built_value:
   intl:
   unit_testing:
   starlink:
 dev_dependencies:
-  reflectable_builder:
-  json_serializable:
-  built_value_generator:
-  lints:
-  path:
-  build_runner:
-  build_test:
-  test:
+  reflectable: ^5.2.3
+  reflectable_builder: ^1.2.3
+  json_serializable: ^6.14.0
+  built_value_generator: ^8.12.6
+  lints: ^6.1.0
+  path: ^1.9.1
+  build_runner: ^2.15.0
+  build_test: ^3.5.15
+  test: ^1.31.1
 dependency_overrides:
   unit_testing:
     path: ../models/unit_testing

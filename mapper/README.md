@@ -141,14 +141,14 @@ targets:
 Now run the code generation step with the root of your package as the current directory:
 
 ```shell
-dart run build_runner build --delete-conflicting-outputs
+dart run build_runner build
 ```
 
 **You'll need to re-run code generation each time you are making changes to `lib/main.dart`**
 So for development time, use `watch` like this:
 
 ```shell
-dart run build_runner watch --delete-conflicting-outputs
+dart run build_runner watch
 ```
 
 Each time you modify your project code, all `*.mapper.g.dart` files will be updated as well.

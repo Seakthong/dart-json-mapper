@@ -18,10 +18,14 @@ List<String> toWords(String input, [CaseStyle? caseStyle = defaultCaseStyle]) {
         return [input];
       }
       return deCapitalize(input)
-          .replaceAllMapped(RegExp('([a-z0-9])([A-Z])'),
-              (match) => '${match.group(1)} ${match.group(2)}')
-          .replaceAllMapped(RegExp('([A-Z])([A-Z])(?=[a-z])'),
-              (match) => '${match.group(1)} ${match.group(2)}')
+          .replaceAllMapped(
+            RegExp('([a-z0-9])([A-Z])'),
+            (match) => '${match.group(1)} ${match.group(2)}',
+          )
+          .replaceAllMapped(
+            RegExp('([A-Z])([A-Z])(?=[a-z])'),
+            (match) => '${match.group(1)} ${match.group(2)}',
+          )
           .toLowerCase()
           .split(' ');
     case CaseStyle.camel:
@@ -29,20 +33,25 @@ List<String> toWords(String input, [CaseStyle? caseStyle = defaultCaseStyle]) {
         return [input];
       }
       return input
-          .replaceAllMapped(RegExp('([a-z0-9])([A-Z])'),
-              (match) => '${match.group(1)} ${match.group(2)}')
-          .replaceAllMapped(RegExp('([A-Z])([A-Z])(?=[a-z])'),
-              (match) => '${match.group(1)} ${match.group(2)}')
+          .replaceAllMapped(
+            RegExp('([a-z0-9])([A-Z])'),
+            (match) => '${match.group(1)} ${match.group(2)}',
+          )
+          .replaceAllMapped(
+            RegExp('([A-Z])([A-Z])(?=[a-z])'),
+            (match) => '${match.group(1)} ${match.group(2)}',
+          )
           .toLowerCase()
           .split(' ');
-    default:
-      return input.split(' ');
   }
 }
 
 /// Omits leading words from [input] when they are equal to [prefix] words
-String skipPrefix(String prefix, String input,
-    [CaseStyle? caseStyle = defaultCaseStyle]) {
+String skipPrefix(
+  String prefix,
+  String input, [
+  CaseStyle? caseStyle = defaultCaseStyle,
+]) {
   final effectiveCaseStyle = caseStyle ?? defaultCaseStyle;
   final prefixWords = toWords(prefix, effectiveCaseStyle);
   final inputWords = toWords(input, effectiveCaseStyle);
@@ -58,14 +67,21 @@ String skipPrefix(String prefix, String input,
 }
 
 String capitalize(String input) => input.replaceFirstMapped(
-    RegExp(r'(^|\s)[a-z]'), (match) => match.group(0)!.toUpperCase());
+  RegExp(r'(^|\s)[a-z]'),
+  (match) => match.group(0)!.toUpperCase(),
+);
 
 String deCapitalize(String input) => input.replaceFirstMapped(
-    RegExp(r'(^|\s)[A-Z]'), (match) => match.group(0)!.toLowerCase());
+  RegExp(r'(^|\s)[A-Z]'),
+  (match) => match.group(0)!.toLowerCase(),
+);
 
 /// Transforms identifier from [sourceCaseStyle] to [targetCaseStyle]
 String transformIdentifierCaseStyle(
-    String source, CaseStyle? targetCaseStyle, CaseStyle? sourceCaseStyle) {
+  String source,
+  CaseStyle? targetCaseStyle,
+  CaseStyle? sourceCaseStyle,
+) {
   if (sourceCaseStyle == targetCaseStyle) {
     return source;
   }
@@ -77,14 +93,17 @@ String transformIdentifierCaseStyle(
     case CaseStyle.snakeAllCaps:
       return toWords(source, sourceCaseStyle).join('_').toUpperCase();
     case CaseStyle.pascal:
-      return toWords(source, sourceCaseStyle)
-          .map((word) => capitalize(word))
-          .join('');
+      return toWords(
+        source,
+        sourceCaseStyle,
+      ).map((word) => capitalize(word)).join('');
     case CaseStyle.camel:
-      return deCapitalize(toWords(source, sourceCaseStyle)
-          .map((word) => word.toLowerCase())
-          .map((e) => capitalize(e))
-          .join(''));
+      return deCapitalize(
+        toWords(
+          source,
+          sourceCaseStyle,
+        ).map((word) => word.toLowerCase()).map((e) => capitalize(e)).join(''),
+      );
     default:
       return source;
   }
