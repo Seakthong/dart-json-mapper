@@ -6,10 +6,11 @@ part of 'built_value_test.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializers _$serializers = (Serializers().toBuilder()
-      ..add(Record.serializer)
-      ..add(SpaceTrack.serializer))
-    .build();
+Serializers _$serializers =
+    (Serializers().toBuilder()
+          ..add(Record.serializer)
+          ..add(SpaceTrack.serializer))
+        .build();
 Serializer<SpaceTrack> _$spaceTrackSerializer = _$SpaceTrackSerializer();
 Serializer<Record> _$recordSerializer = _$RecordSerializer();
 
@@ -20,106 +21,171 @@ class _$SpaceTrackSerializer implements StructuredSerializer<SpaceTrack> {
   final String wireName = 'SpaceTrack';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, SpaceTrack object,
-      {FullType specifiedType = FullType.unspecified}) {
+  Iterable<Object?> serialize(
+    Serializers serializers,
+    SpaceTrack object, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     final result = <Object?>[
       'CCSDS_OMM_VERS',
-      serializers.serialize(object.cCSDSOMMVERS,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.cCSDSOMMVERS,
+        specifiedType: const FullType(String),
+      ),
       'COMMENT',
-      serializers.serialize(object.cOMMENT,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.cOMMENT,
+        specifiedType: const FullType(String),
+      ),
       'CREATION_DATE',
-      serializers.serialize(object.cREATIONDATE,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.cREATIONDATE,
+        specifiedType: const FullType(String),
+      ),
       'ORIGINATOR',
-      serializers.serialize(object.oRIGINATOR,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.oRIGINATOR,
+        specifiedType: const FullType(String),
+      ),
       'OBJECT_NAME',
-      serializers.serialize(object.oBJECTNAME,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.oBJECTNAME,
+        specifiedType: const FullType(String),
+      ),
       'OBJECT_ID',
-      serializers.serialize(object.oBJECTID,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.oBJECTID,
+        specifiedType: const FullType(String),
+      ),
       'CENTER_NAME',
-      serializers.serialize(object.cENTERNAME,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.cENTERNAME,
+        specifiedType: const FullType(String),
+      ),
       'REF_FRAME',
-      serializers.serialize(object.rEFFRAME,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.rEFFRAME,
+        specifiedType: const FullType(String),
+      ),
       'TIME_SYSTEM',
-      serializers.serialize(object.tIMESYSTEM,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.tIMESYSTEM,
+        specifiedType: const FullType(String),
+      ),
       'MEAN_ELEMENT_THEORY',
-      serializers.serialize(object.mEANELEMENTTHEORY,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.mEANELEMENTTHEORY,
+        specifiedType: const FullType(String),
+      ),
       'EPOCH',
-      serializers.serialize(object.ePOCH,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.ePOCH,
+        specifiedType: const FullType(String),
+      ),
       'MEAN_MOTION',
-      serializers.serialize(object.mEANMOTION,
-          specifiedType: const FullType(num)),
+      serializers.serialize(
+        object.mEANMOTION,
+        specifiedType: const FullType(num),
+      ),
       'ECCENTRICITY',
-      serializers.serialize(object.eCCENTRICITY,
-          specifiedType: const FullType(num)),
+      serializers.serialize(
+        object.eCCENTRICITY,
+        specifiedType: const FullType(num),
+      ),
       'INCLINATION',
-      serializers.serialize(object.iNCLINATION,
-          specifiedType: const FullType(num)),
+      serializers.serialize(
+        object.iNCLINATION,
+        specifiedType: const FullType(num),
+      ),
       'RA_OF_ASC_NODE',
-      serializers.serialize(object.rAOFASCNODE,
-          specifiedType: const FullType(num)),
+      serializers.serialize(
+        object.rAOFASCNODE,
+        specifiedType: const FullType(num),
+      ),
       'ARG_OF_PERICENTER',
-      serializers.serialize(object.aRGOFPERICENTER,
-          specifiedType: const FullType(num)),
+      serializers.serialize(
+        object.aRGOFPERICENTER,
+        specifiedType: const FullType(num),
+      ),
       'MEAN_ANOMALY',
-      serializers.serialize(object.mEANANOMALY,
-          specifiedType: const FullType(num)),
+      serializers.serialize(
+        object.mEANANOMALY,
+        specifiedType: const FullType(num),
+      ),
       'EPHEMERIS_TYPE',
-      serializers.serialize(object.ePHEMERISTYPE,
-          specifiedType: const FullType(num)),
+      serializers.serialize(
+        object.ePHEMERISTYPE,
+        specifiedType: const FullType(num),
+      ),
       'CLASSIFICATION_TYPE',
-      serializers.serialize(object.cLASSIFICATIONTYPE,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.cLASSIFICATIONTYPE,
+        specifiedType: const FullType(String),
+      ),
       'NORAD_CAT_ID',
-      serializers.serialize(object.nORADCATID,
-          specifiedType: const FullType(num)),
+      serializers.serialize(
+        object.nORADCATID,
+        specifiedType: const FullType(num),
+      ),
       'ELEMENT_SET_NO',
-      serializers.serialize(object.eLEMENTSETNO,
-          specifiedType: const FullType(num)),
+      serializers.serialize(
+        object.eLEMENTSETNO,
+        specifiedType: const FullType(num),
+      ),
       'REV_AT_EPOCH',
-      serializers.serialize(object.rEVATEPOCH,
-          specifiedType: const FullType(num)),
+      serializers.serialize(
+        object.rEVATEPOCH,
+        specifiedType: const FullType(num),
+      ),
       'BSTAR',
       serializers.serialize(object.bSTAR, specifiedType: const FullType(num)),
       'MEAN_MOTION_DOT',
-      serializers.serialize(object.mEANMOTIONDOT,
-          specifiedType: const FullType(num)),
+      serializers.serialize(
+        object.mEANMOTIONDOT,
+        specifiedType: const FullType(num),
+      ),
       'MEAN_MOTION_DDOT',
-      serializers.serialize(object.mEANMOTIONDDOT,
-          specifiedType: const FullType(num)),
+      serializers.serialize(
+        object.mEANMOTIONDDOT,
+        specifiedType: const FullType(num),
+      ),
       'SEMIMAJOR_AXIS',
-      serializers.serialize(object.sEMIMAJORAXIS,
-          specifiedType: const FullType(num)),
+      serializers.serialize(
+        object.sEMIMAJORAXIS,
+        specifiedType: const FullType(num),
+      ),
       'PERIOD',
       serializers.serialize(object.pERIOD, specifiedType: const FullType(num)),
       'APOAPSIS',
-      serializers.serialize(object.aPOAPSIS,
-          specifiedType: const FullType(num)),
+      serializers.serialize(
+        object.aPOAPSIS,
+        specifiedType: const FullType(num),
+      ),
       'PERIAPSIS',
-      serializers.serialize(object.pERIAPSIS,
-          specifiedType: const FullType(num)),
+      serializers.serialize(
+        object.pERIAPSIS,
+        specifiedType: const FullType(num),
+      ),
       'OBJECT_TYPE',
-      serializers.serialize(object.oBJECTTYPE,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.oBJECTTYPE,
+        specifiedType: const FullType(String),
+      ),
       'RCS_SIZE',
-      serializers.serialize(object.rCSSIZE,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.rCSSIZE,
+        specifiedType: const FullType(String),
+      ),
       'COUNTRY_CODE',
-      serializers.serialize(object.cOUNTRYCODE,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.cOUNTRYCODE,
+        specifiedType: const FullType(String),
+      ),
       'LAUNCH_DATE',
-      serializers.serialize(object.lAUNCHDATE,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.lAUNCHDATE,
+        specifiedType: const FullType(String),
+      ),
       'SITE',
       serializers.serialize(object.sITE, specifiedType: const FullType(String)),
       'DECAYED',
@@ -129,29 +195,39 @@ class _$SpaceTrackSerializer implements StructuredSerializer<SpaceTrack> {
       'GP_ID',
       serializers.serialize(object.gPID, specifiedType: const FullType(num)),
       'TLE_LINE0',
-      serializers.serialize(object.tLELINE0,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.tLELINE0,
+        specifiedType: const FullType(String),
+      ),
       'TLE_LINE1',
-      serializers.serialize(object.tLELINE1,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.tLELINE1,
+        specifiedType: const FullType(String),
+      ),
       'TLE_LINE2',
-      serializers.serialize(object.tLELINE2,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.tLELINE2,
+        specifiedType: const FullType(String),
+      ),
     ];
     Object? value;
     value = object.dECAYDATE;
     if (value != null) {
       result
         ..add('DECAY_DATE')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
+        ..add(
+          serializers.serialize(value, specifiedType: const FullType(String)),
+        );
     }
     return result;
   }
 
   @override
-  SpaceTrack deserialize(Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
+  SpaceTrack deserialize(
+    Serializers serializers,
+    Iterable<Object?> serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     final result = SpaceTrackBuilder();
 
     final iterator = serialized.iterator;
@@ -161,168 +237,332 @@ class _$SpaceTrackSerializer implements StructuredSerializer<SpaceTrack> {
       final Object? value = iterator.current;
       switch (key) {
         case 'CCSDS_OMM_VERS':
-          result.cCSDSOMMVERS = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.cCSDSOMMVERS =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'COMMENT':
-          result.cOMMENT = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.cOMMENT =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'CREATION_DATE':
-          result.cREATIONDATE = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.cREATIONDATE =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'ORIGINATOR':
-          result.oRIGINATOR = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.oRIGINATOR =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'OBJECT_NAME':
-          result.oBJECTNAME = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.oBJECTNAME =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'OBJECT_ID':
-          result.oBJECTID = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.oBJECTID =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'CENTER_NAME':
-          result.cENTERNAME = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.cENTERNAME =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'REF_FRAME':
-          result.rEFFRAME = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.rEFFRAME =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'TIME_SYSTEM':
-          result.tIMESYSTEM = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.tIMESYSTEM =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'MEAN_ELEMENT_THEORY':
-          result.mEANELEMENTTHEORY = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.mEANELEMENTTHEORY =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'EPOCH':
-          result.ePOCH = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.ePOCH =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'MEAN_MOTION':
-          result.mEANMOTION = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.mEANMOTION =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'ECCENTRICITY':
-          result.eCCENTRICITY = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.eCCENTRICITY =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'INCLINATION':
-          result.iNCLINATION = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.iNCLINATION =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'RA_OF_ASC_NODE':
-          result.rAOFASCNODE = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.rAOFASCNODE =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'ARG_OF_PERICENTER':
-          result.aRGOFPERICENTER = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.aRGOFPERICENTER =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'MEAN_ANOMALY':
-          result.mEANANOMALY = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.mEANANOMALY =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'EPHEMERIS_TYPE':
-          result.ePHEMERISTYPE = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.ePHEMERISTYPE =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'CLASSIFICATION_TYPE':
-          result.cLASSIFICATIONTYPE = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.cLASSIFICATIONTYPE =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'NORAD_CAT_ID':
-          result.nORADCATID = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.nORADCATID =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'ELEMENT_SET_NO':
-          result.eLEMENTSETNO = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.eLEMENTSETNO =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'REV_AT_EPOCH':
-          result.rEVATEPOCH = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.rEVATEPOCH =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'BSTAR':
-          result.bSTAR = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.bSTAR =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'MEAN_MOTION_DOT':
-          result.mEANMOTIONDOT = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.mEANMOTIONDOT =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'MEAN_MOTION_DDOT':
-          result.mEANMOTIONDDOT = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.mEANMOTIONDDOT =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'SEMIMAJOR_AXIS':
-          result.sEMIMAJORAXIS = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.sEMIMAJORAXIS =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'PERIOD':
-          result.pERIOD = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.pERIOD =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'APOAPSIS':
-          result.aPOAPSIS = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.aPOAPSIS =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'PERIAPSIS':
-          result.pERIAPSIS = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.pERIAPSIS =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'OBJECT_TYPE':
-          result.oBJECTTYPE = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.oBJECTTYPE =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'RCS_SIZE':
-          result.rCSSIZE = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.rCSSIZE =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'COUNTRY_CODE':
-          result.cOUNTRYCODE = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.cOUNTRYCODE =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'LAUNCH_DATE':
-          result.lAUNCHDATE = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.lAUNCHDATE =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'SITE':
-          result.sITE = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.sITE =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'DECAY_DATE':
-          result.dECAYDATE = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
+          result.dECAYDATE =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String?;
           break;
         case 'DECAYED':
-          result.dECAYED = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.dECAYED =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'FILE':
-          result.fILE = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.fILE =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'GP_ID':
-          result.gPID = serializers.deserialize(value,
-              specifiedType: const FullType(num))! as num;
+          result.gPID =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(num),
+                  )!
+                  as num;
           break;
         case 'TLE_LINE0':
-          result.tLELINE0 = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.tLELINE0 =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'TLE_LINE1':
-          result.tLELINE1 = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.tLELINE1 =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'TLE_LINE2':
-          result.tLELINE2 = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.tLELINE2 =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
       }
     }
@@ -338,18 +578,27 @@ class _$RecordSerializer implements StructuredSerializer<Record> {
   final String wireName = 'Record';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, Record object,
-      {FullType specifiedType = FullType.unspecified}) {
+  Iterable<Object?> serialize(
+    Serializers serializers,
+    Record object, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     final result = <Object?>[
       'spaceTrack',
-      serializers.serialize(object.spaceTrack,
-          specifiedType: const FullType(SpaceTrack)),
+      serializers.serialize(
+        object.spaceTrack,
+        specifiedType: const FullType(SpaceTrack),
+      ),
       'version',
-      serializers.serialize(object.version,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.version,
+        specifiedType: const FullType(String),
+      ),
       'launch',
-      serializers.serialize(object.launch,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.launch,
+        specifiedType: const FullType(String),
+      ),
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(String)),
     ];
@@ -358,8 +607,11 @@ class _$RecordSerializer implements StructuredSerializer<Record> {
   }
 
   @override
-  Record deserialize(Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
+  Record deserialize(
+    Serializers serializers,
+    Iterable<Object?> serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     final result = RecordBuilder();
 
     final iterator = serialized.iterator;
@@ -369,20 +621,37 @@ class _$RecordSerializer implements StructuredSerializer<Record> {
       final Object? value = iterator.current;
       switch (key) {
         case 'spaceTrack':
-          result.spaceTrack.replace(serializers.deserialize(value,
-              specifiedType: const FullType(SpaceTrack))! as SpaceTrack);
+          result.spaceTrack.replace(
+            serializers.deserialize(
+                  value,
+                  specifiedType: const FullType(SpaceTrack),
+                )!
+                as SpaceTrack,
+          );
           break;
         case 'version':
-          result.version = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.version =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'launch':
-          result.launch = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.launch =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
         case 'id':
-          result.id = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+          result.id =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )!
+                  as String;
           break;
       }
     }
@@ -478,49 +747,49 @@ class _$SpaceTrack extends SpaceTrack {
   factory _$SpaceTrack([void Function(SpaceTrackBuilder)? updates]) =>
       (SpaceTrackBuilder()..update(updates))._build();
 
-  _$SpaceTrack._(
-      {required this.cCSDSOMMVERS,
-      required this.cOMMENT,
-      required this.cREATIONDATE,
-      required this.oRIGINATOR,
-      required this.oBJECTNAME,
-      required this.oBJECTID,
-      required this.cENTERNAME,
-      required this.rEFFRAME,
-      required this.tIMESYSTEM,
-      required this.mEANELEMENTTHEORY,
-      required this.ePOCH,
-      required this.mEANMOTION,
-      required this.eCCENTRICITY,
-      required this.iNCLINATION,
-      required this.rAOFASCNODE,
-      required this.aRGOFPERICENTER,
-      required this.mEANANOMALY,
-      required this.ePHEMERISTYPE,
-      required this.cLASSIFICATIONTYPE,
-      required this.nORADCATID,
-      required this.eLEMENTSETNO,
-      required this.rEVATEPOCH,
-      required this.bSTAR,
-      required this.mEANMOTIONDOT,
-      required this.mEANMOTIONDDOT,
-      required this.sEMIMAJORAXIS,
-      required this.pERIOD,
-      required this.aPOAPSIS,
-      required this.pERIAPSIS,
-      required this.oBJECTTYPE,
-      required this.rCSSIZE,
-      required this.cOUNTRYCODE,
-      required this.lAUNCHDATE,
-      required this.sITE,
-      this.dECAYDATE,
-      required this.dECAYED,
-      required this.fILE,
-      required this.gPID,
-      required this.tLELINE0,
-      required this.tLELINE1,
-      required this.tLELINE2})
-      : super._();
+  _$SpaceTrack._({
+    required this.cCSDSOMMVERS,
+    required this.cOMMENT,
+    required this.cREATIONDATE,
+    required this.oRIGINATOR,
+    required this.oBJECTNAME,
+    required this.oBJECTID,
+    required this.cENTERNAME,
+    required this.rEFFRAME,
+    required this.tIMESYSTEM,
+    required this.mEANELEMENTTHEORY,
+    required this.ePOCH,
+    required this.mEANMOTION,
+    required this.eCCENTRICITY,
+    required this.iNCLINATION,
+    required this.rAOFASCNODE,
+    required this.aRGOFPERICENTER,
+    required this.mEANANOMALY,
+    required this.ePHEMERISTYPE,
+    required this.cLASSIFICATIONTYPE,
+    required this.nORADCATID,
+    required this.eLEMENTSETNO,
+    required this.rEVATEPOCH,
+    required this.bSTAR,
+    required this.mEANMOTIONDOT,
+    required this.mEANMOTIONDDOT,
+    required this.sEMIMAJORAXIS,
+    required this.pERIOD,
+    required this.aPOAPSIS,
+    required this.pERIAPSIS,
+    required this.oBJECTTYPE,
+    required this.rCSSIZE,
+    required this.cOUNTRYCODE,
+    required this.lAUNCHDATE,
+    required this.sITE,
+    this.dECAYDATE,
+    required this.dECAYED,
+    required this.fILE,
+    required this.gPID,
+    required this.tLELINE0,
+    required this.tLELINE1,
+    required this.tLELINE2,
+  }) : super._();
   @override
   SpaceTrack rebuild(void Function(SpaceTrackBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -910,89 +1179,210 @@ class SpaceTrackBuilder implements Builder<SpaceTrack, SpaceTrackBuilder> {
   SpaceTrack build() => _build();
 
   _$SpaceTrack _build() {
-    final _$result = _$v ??
+    final _$result =
+        _$v ??
         _$SpaceTrack._(
           cCSDSOMMVERS: BuiltValueNullFieldError.checkNotNull(
-              cCSDSOMMVERS, r'SpaceTrack', 'cCSDSOMMVERS'),
+            cCSDSOMMVERS,
+            r'SpaceTrack',
+            'cCSDSOMMVERS',
+          ),
           cOMMENT: BuiltValueNullFieldError.checkNotNull(
-              cOMMENT, r'SpaceTrack', 'cOMMENT'),
+            cOMMENT,
+            r'SpaceTrack',
+            'cOMMENT',
+          ),
           cREATIONDATE: BuiltValueNullFieldError.checkNotNull(
-              cREATIONDATE, r'SpaceTrack', 'cREATIONDATE'),
+            cREATIONDATE,
+            r'SpaceTrack',
+            'cREATIONDATE',
+          ),
           oRIGINATOR: BuiltValueNullFieldError.checkNotNull(
-              oRIGINATOR, r'SpaceTrack', 'oRIGINATOR'),
+            oRIGINATOR,
+            r'SpaceTrack',
+            'oRIGINATOR',
+          ),
           oBJECTNAME: BuiltValueNullFieldError.checkNotNull(
-              oBJECTNAME, r'SpaceTrack', 'oBJECTNAME'),
+            oBJECTNAME,
+            r'SpaceTrack',
+            'oBJECTNAME',
+          ),
           oBJECTID: BuiltValueNullFieldError.checkNotNull(
-              oBJECTID, r'SpaceTrack', 'oBJECTID'),
+            oBJECTID,
+            r'SpaceTrack',
+            'oBJECTID',
+          ),
           cENTERNAME: BuiltValueNullFieldError.checkNotNull(
-              cENTERNAME, r'SpaceTrack', 'cENTERNAME'),
+            cENTERNAME,
+            r'SpaceTrack',
+            'cENTERNAME',
+          ),
           rEFFRAME: BuiltValueNullFieldError.checkNotNull(
-              rEFFRAME, r'SpaceTrack', 'rEFFRAME'),
+            rEFFRAME,
+            r'SpaceTrack',
+            'rEFFRAME',
+          ),
           tIMESYSTEM: BuiltValueNullFieldError.checkNotNull(
-              tIMESYSTEM, r'SpaceTrack', 'tIMESYSTEM'),
+            tIMESYSTEM,
+            r'SpaceTrack',
+            'tIMESYSTEM',
+          ),
           mEANELEMENTTHEORY: BuiltValueNullFieldError.checkNotNull(
-              mEANELEMENTTHEORY, r'SpaceTrack', 'mEANELEMENTTHEORY'),
+            mEANELEMENTTHEORY,
+            r'SpaceTrack',
+            'mEANELEMENTTHEORY',
+          ),
           ePOCH: BuiltValueNullFieldError.checkNotNull(
-              ePOCH, r'SpaceTrack', 'ePOCH'),
+            ePOCH,
+            r'SpaceTrack',
+            'ePOCH',
+          ),
           mEANMOTION: BuiltValueNullFieldError.checkNotNull(
-              mEANMOTION, r'SpaceTrack', 'mEANMOTION'),
+            mEANMOTION,
+            r'SpaceTrack',
+            'mEANMOTION',
+          ),
           eCCENTRICITY: BuiltValueNullFieldError.checkNotNull(
-              eCCENTRICITY, r'SpaceTrack', 'eCCENTRICITY'),
+            eCCENTRICITY,
+            r'SpaceTrack',
+            'eCCENTRICITY',
+          ),
           iNCLINATION: BuiltValueNullFieldError.checkNotNull(
-              iNCLINATION, r'SpaceTrack', 'iNCLINATION'),
+            iNCLINATION,
+            r'SpaceTrack',
+            'iNCLINATION',
+          ),
           rAOFASCNODE: BuiltValueNullFieldError.checkNotNull(
-              rAOFASCNODE, r'SpaceTrack', 'rAOFASCNODE'),
+            rAOFASCNODE,
+            r'SpaceTrack',
+            'rAOFASCNODE',
+          ),
           aRGOFPERICENTER: BuiltValueNullFieldError.checkNotNull(
-              aRGOFPERICENTER, r'SpaceTrack', 'aRGOFPERICENTER'),
+            aRGOFPERICENTER,
+            r'SpaceTrack',
+            'aRGOFPERICENTER',
+          ),
           mEANANOMALY: BuiltValueNullFieldError.checkNotNull(
-              mEANANOMALY, r'SpaceTrack', 'mEANANOMALY'),
+            mEANANOMALY,
+            r'SpaceTrack',
+            'mEANANOMALY',
+          ),
           ePHEMERISTYPE: BuiltValueNullFieldError.checkNotNull(
-              ePHEMERISTYPE, r'SpaceTrack', 'ePHEMERISTYPE'),
+            ePHEMERISTYPE,
+            r'SpaceTrack',
+            'ePHEMERISTYPE',
+          ),
           cLASSIFICATIONTYPE: BuiltValueNullFieldError.checkNotNull(
-              cLASSIFICATIONTYPE, r'SpaceTrack', 'cLASSIFICATIONTYPE'),
+            cLASSIFICATIONTYPE,
+            r'SpaceTrack',
+            'cLASSIFICATIONTYPE',
+          ),
           nORADCATID: BuiltValueNullFieldError.checkNotNull(
-              nORADCATID, r'SpaceTrack', 'nORADCATID'),
+            nORADCATID,
+            r'SpaceTrack',
+            'nORADCATID',
+          ),
           eLEMENTSETNO: BuiltValueNullFieldError.checkNotNull(
-              eLEMENTSETNO, r'SpaceTrack', 'eLEMENTSETNO'),
+            eLEMENTSETNO,
+            r'SpaceTrack',
+            'eLEMENTSETNO',
+          ),
           rEVATEPOCH: BuiltValueNullFieldError.checkNotNull(
-              rEVATEPOCH, r'SpaceTrack', 'rEVATEPOCH'),
+            rEVATEPOCH,
+            r'SpaceTrack',
+            'rEVATEPOCH',
+          ),
           bSTAR: BuiltValueNullFieldError.checkNotNull(
-              bSTAR, r'SpaceTrack', 'bSTAR'),
+            bSTAR,
+            r'SpaceTrack',
+            'bSTAR',
+          ),
           mEANMOTIONDOT: BuiltValueNullFieldError.checkNotNull(
-              mEANMOTIONDOT, r'SpaceTrack', 'mEANMOTIONDOT'),
+            mEANMOTIONDOT,
+            r'SpaceTrack',
+            'mEANMOTIONDOT',
+          ),
           mEANMOTIONDDOT: BuiltValueNullFieldError.checkNotNull(
-              mEANMOTIONDDOT, r'SpaceTrack', 'mEANMOTIONDDOT'),
+            mEANMOTIONDDOT,
+            r'SpaceTrack',
+            'mEANMOTIONDDOT',
+          ),
           sEMIMAJORAXIS: BuiltValueNullFieldError.checkNotNull(
-              sEMIMAJORAXIS, r'SpaceTrack', 'sEMIMAJORAXIS'),
+            sEMIMAJORAXIS,
+            r'SpaceTrack',
+            'sEMIMAJORAXIS',
+          ),
           pERIOD: BuiltValueNullFieldError.checkNotNull(
-              pERIOD, r'SpaceTrack', 'pERIOD'),
+            pERIOD,
+            r'SpaceTrack',
+            'pERIOD',
+          ),
           aPOAPSIS: BuiltValueNullFieldError.checkNotNull(
-              aPOAPSIS, r'SpaceTrack', 'aPOAPSIS'),
+            aPOAPSIS,
+            r'SpaceTrack',
+            'aPOAPSIS',
+          ),
           pERIAPSIS: BuiltValueNullFieldError.checkNotNull(
-              pERIAPSIS, r'SpaceTrack', 'pERIAPSIS'),
+            pERIAPSIS,
+            r'SpaceTrack',
+            'pERIAPSIS',
+          ),
           oBJECTTYPE: BuiltValueNullFieldError.checkNotNull(
-              oBJECTTYPE, r'SpaceTrack', 'oBJECTTYPE'),
+            oBJECTTYPE,
+            r'SpaceTrack',
+            'oBJECTTYPE',
+          ),
           rCSSIZE: BuiltValueNullFieldError.checkNotNull(
-              rCSSIZE, r'SpaceTrack', 'rCSSIZE'),
+            rCSSIZE,
+            r'SpaceTrack',
+            'rCSSIZE',
+          ),
           cOUNTRYCODE: BuiltValueNullFieldError.checkNotNull(
-              cOUNTRYCODE, r'SpaceTrack', 'cOUNTRYCODE'),
+            cOUNTRYCODE,
+            r'SpaceTrack',
+            'cOUNTRYCODE',
+          ),
           lAUNCHDATE: BuiltValueNullFieldError.checkNotNull(
-              lAUNCHDATE, r'SpaceTrack', 'lAUNCHDATE'),
+            lAUNCHDATE,
+            r'SpaceTrack',
+            'lAUNCHDATE',
+          ),
           sITE: BuiltValueNullFieldError.checkNotNull(
-              sITE, r'SpaceTrack', 'sITE'),
+            sITE,
+            r'SpaceTrack',
+            'sITE',
+          ),
           dECAYDATE: dECAYDATE,
           dECAYED: BuiltValueNullFieldError.checkNotNull(
-              dECAYED, r'SpaceTrack', 'dECAYED'),
+            dECAYED,
+            r'SpaceTrack',
+            'dECAYED',
+          ),
           fILE: BuiltValueNullFieldError.checkNotNull(
-              fILE, r'SpaceTrack', 'fILE'),
+            fILE,
+            r'SpaceTrack',
+            'fILE',
+          ),
           gPID: BuiltValueNullFieldError.checkNotNull(
-              gPID, r'SpaceTrack', 'gPID'),
+            gPID,
+            r'SpaceTrack',
+            'gPID',
+          ),
           tLELINE0: BuiltValueNullFieldError.checkNotNull(
-              tLELINE0, r'SpaceTrack', 'tLELINE0'),
+            tLELINE0,
+            r'SpaceTrack',
+            'tLELINE0',
+          ),
           tLELINE1: BuiltValueNullFieldError.checkNotNull(
-              tLELINE1, r'SpaceTrack', 'tLELINE1'),
+            tLELINE1,
+            r'SpaceTrack',
+            'tLELINE1',
+          ),
           tLELINE2: BuiltValueNullFieldError.checkNotNull(
-              tLELINE2, r'SpaceTrack', 'tLELINE2'),
+            tLELINE2,
+            r'SpaceTrack',
+            'tLELINE2',
+          ),
         );
     replace(_$result);
     return _$result;
@@ -1012,12 +1402,12 @@ class _$Record extends Record {
   factory _$Record([void Function(RecordBuilder)? updates]) =>
       (RecordBuilder()..update(updates))._build();
 
-  _$Record._(
-      {required this.spaceTrack,
-      required this.version,
-      required this.launch,
-      required this.id})
-      : super._();
+  _$Record._({
+    required this.spaceTrack,
+    required this.version,
+    required this.launch,
+    required this.id,
+  }) : super._();
   @override
   Record rebuild(void Function(RecordBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -1108,13 +1498,20 @@ class RecordBuilder implements Builder<Record, RecordBuilder> {
   _$Record _build() {
     _$Record _$result;
     try {
-      _$result = _$v ??
+      _$result =
+          _$v ??
           _$Record._(
             spaceTrack: spaceTrack.build(),
             version: BuiltValueNullFieldError.checkNotNull(
-                version, r'Record', 'version'),
+              version,
+              r'Record',
+              'version',
+            ),
             launch: BuiltValueNullFieldError.checkNotNull(
-                launch, r'Record', 'launch'),
+              launch,
+              r'Record',
+              'launch',
+            ),
             id: BuiltValueNullFieldError.checkNotNull(id, r'Record', 'id'),
           );
     } catch (_) {
@@ -1124,7 +1521,10 @@ class RecordBuilder implements Builder<Record, RecordBuilder> {
         spaceTrack.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
-            r'Record', _$failedField, e.toString());
+          r'Record',
+          _$failedField,
+          e.toString(),
+        );
       }
       rethrow;
     }

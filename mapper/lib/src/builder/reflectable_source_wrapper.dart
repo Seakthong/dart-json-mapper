@@ -49,16 +49,22 @@ JsonMapper initializeJsonMapper($initSignature) {''';
   final _importPrefix = <String?, String>{};
 
   ReflectableSourceWrapper(
-      this.inputLibrary, this.options, this.mapperPubspec, this.inputPubspec) {
+    this.inputLibrary,
+    this.options,
+    this.mapperPubspec,
+    this.inputPubspec,
+  ) {
     _inputLibraryPackageName = getLibraryPackageName(inputLibrary);
     _libraryVisitor = LibraryVisitor(_inputLibraryPackageName);
-    inputLibrary.visitChildren(_libraryVisitor!);
-    _inputLibraryPath = inputLibrary.identifier
-        .substring(0, inputLibrary.identifier.lastIndexOf('/') + 1);
+    _libraryVisitor!.visitLibrary(inputLibrary);
+    _inputLibraryPath = inputLibrary.identifier.substring(
+      0,
+      inputLibrary.identifier.lastIndexOf('/') + 1,
+    );
   }
 
   String getLibraryPackageName(LibraryElement library) =>
-      'package:${library.source.uri.toString().split(':').last.split('/').first}';
+      'package:${library.uri.toString().split(':').last.split('/').first}';
 
   Iterable<String> get allowedIterables {
     return (options['iterables'] as String).split(',').map((x) => x.trim());
@@ -74,7 +80,7 @@ JsonMapper initializeJsonMapper($initSignature) {''';
   }
 
   String get _libraryName {
-    return ('${inputLibrary.identifier.split('/').last.replaceAll('.dart', '').replaceAll('.', ' ').replaceAll('_', ' ')} generated adapter')
+    return '${inputLibrary.identifier.split('/').last.replaceAll('.dart', '').replaceAll('.', ' ').replaceAll('_', ' ')} generated adapter'
         .split(' ')
         .map((e) => capitalize(e))
         .join(' ')
@@ -83,24 +89,29 @@ JsonMapper initializeJsonMapper($initSignature) {''';
 
   String _getElementFullName(Element element) {
     final prefix = _elementImportPrefix[element];
-    return '''$prefix.${element.name}''';
+    return '''$prefix.${element.displayName}''';
   }
 
   String _renderValueDecoratorsForClassElement(InterfaceElement element) {
     return [
-      ...[
-        'List',
-        'Set'
-      ].where((x) => allowedIterables.contains(x)).map((iterable) =>
-          '''    typeOf<$iterable<${_getElementFullName(element)}>>(): (value) => value.cast<${_getElementFullName(element)}>()'''),
-      ...[
-        'HashSet'
-      ].where((x) => allowedIterables.contains(x)).map((iterable) =>
-          '''    typeOf<$iterable<${_getElementFullName(element)}>>(): (value) => $iterable<${_getElementFullName(element)}>.of(value.cast<${_getElementFullName(element)}>())'''),
-      ...[
-        'UnmodifiableListView'
-      ].where((x) => allowedIterables.contains(x)).map((iterable) =>
-          '''    typeOf<$iterable<${_getElementFullName(element)}>>(): (value) => $iterable<${_getElementFullName(element)}>(value.cast<${_getElementFullName(element)}>())''')
+      ...['List', 'Set']
+          .where((x) => allowedIterables.contains(x))
+          .map(
+            (iterable) =>
+                '''    typeOf<$iterable<${_getElementFullName(element)}>>(): (value) => value.cast<${_getElementFullName(element)}>()''',
+          ),
+      ...['HashSet']
+          .where((x) => allowedIterables.contains(x))
+          .map(
+            (iterable) =>
+                '''    typeOf<$iterable<${_getElementFullName(element)}>>(): (value) => $iterable<${_getElementFullName(element)}>.of(value.cast<${_getElementFullName(element)}>())''',
+          ),
+      ...['UnmodifiableListView']
+          .where((x) => allowedIterables.contains(x))
+          .map(
+            (iterable) =>
+                '''    typeOf<$iterable<${_getElementFullName(element)}>>(): (value) => $iterable<${_getElementFullName(element)}>(value.cast<${_getElementFullName(element)}>())''',
+          ),
     ].join(',\n');
   }
 
@@ -153,7 +164,9 @@ ${_renderEnumValues()}
   }
 
   void _renderElementImport(
-      InterfaceElement element, Map<String?, List<String>> importsMap) {
+    InterfaceElement element,
+    Map<String?, List<String>> importsMap,
+  ) {
     final elementPath = element.library.identifier;
     String? importString;
     if (elementPath.startsWith(_inputLibraryPath)) {
@@ -169,10 +182,10 @@ ${_renderEnumValues()}
     final prefix = '''x${importsMap.length}''';
     final key = importString;
     if (importsMap.containsKey(key)) {
-      importsMap[key]!.add(element.name);
+      importsMap[key]!.add(element.displayName);
       _elementImportPrefix.putIfAbsent(element, () => _importPrefix[key]);
     }
-    importsMap.putIfAbsent(key, () => [element.name]);
+    importsMap.putIfAbsent(key, () => [element.displayName]);
     _elementImportPrefix.putIfAbsent(element, () => prefix);
     _importPrefix.putIfAbsent(key, () => prefix);
   }
@@ -198,8 +211,10 @@ ${_renderEnumValues()}
     final importsList = {
       isCollectionImportNeeded ? collectionImport : null,
       mapperImport,
-      ...importsMap.keys.map((key) =>
-          '''import '$key' as ${_importPrefix[key]} show ${importsMap[key]!.join(', ')};''')
+      ...importsMap.keys.map(
+        (key) =>
+            '''import '$key' as ${_importPrefix[key]} show ${importsMap[key]!.join(', ')};''',
+      ),
     }.where((x) => x != null).toList();
     importsList.sort();
     return '${importsList.join('\n')}\n';
@@ -221,15 +236,19 @@ ${_renderEnumValues()}
     final patch =
         '\n${_renderLibraryAdapterDefinition(input)}\n$initMethod\n${_renderLibraryAdapterRegistration(input)}';
     return input.replaceFirst(
-            reflectableInitMethod, reflectableInitMethodPatch) +
+          reflectableInitMethod,
+          reflectableInitMethodPatch,
+        ) +
         patch;
   }
 
   bool hasNoIncrementalChanges(LibraryElement library) {
     final incrementalLibraryVisitor = LibraryVisitor(_inputLibraryPackageName);
-    library.visitChildren(incrementalLibraryVisitor);
-    final hasChanges =
-        ChangeAnalyzer(incrementalLibraryVisitor, _libraryVisitor).hasChanges;
+    incrementalLibraryVisitor.visitLibrary(library);
+    final hasChanges = ChangeAnalyzer(
+      incrementalLibraryVisitor,
+      _libraryVisitor,
+    ).hasChanges;
     if (hasChanges) {
       _libraryVisitor = incrementalLibraryVisitor;
       inputLibrary = library;
@@ -238,10 +257,16 @@ ${_renderEnumValues()}
   }
 
   String? wrap(String reflectableGeneratedSource) {
-    lastOutput = _renderHeader() +
+    lastOutput =
+        _renderHeader() +
         _renderImports() +
-        _patchInitMethod(_removeLanguageOverrides(_removeEmptyReflectableOutput(
-            _removeObjectCasts(reflectableGeneratedSource))));
+        _patchInitMethod(
+          _removeLanguageOverrides(
+            _removeEmptyReflectableOutput(
+              _removeObjectCasts(reflectableGeneratedSource),
+            ),
+          ),
+        );
     return lastOutput;
   }
 }

@@ -10,11 +10,11 @@ class ChangeAnalyzer {
   ChangeAnalyzer(this.visitorA, this.visitorB);
 
   Map<String, ComparableClassElement> getClassesMap(
-          Iterable<ClassElement> classes) =>
-      classes.fold({}, (value, element) {
-        value[element.getDisplayString()] = ComparableClassElement(element);
-        return value;
-      });
+    Iterable<ClassElement> classes,
+  ) => classes.fold({}, (value, element) {
+    value[element.displayString()] = ComparableClassElement(element);
+    return value;
+  });
 
   bool get hasChanges {
     final classElementsA = visitorA.visitedPublicAnnotatedClassElements;

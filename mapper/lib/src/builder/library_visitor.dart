@@ -1,12 +1,12 @@
 import 'package:analyzer/dart/element/element.dart';
-import 'package:analyzer/dart/element/visitor.dart';
+import 'package:analyzer/dart/element/visitor2.dart';
 
 import '../model/annotations.dart';
 
-class LibraryVisitor extends RecursiveElementVisitor {
-  Map<num, ClassElement> visitedPublicClassElements = {};
-  Map<num, ClassElement> visitedPublicAnnotatedClassElements = {};
-  Map<num, EnumElement> visitedPublicAnnotatedEnumElements = {};
+class LibraryVisitor extends RecursiveElementVisitor2<void> {
+  Map<int, ClassElement> visitedPublicClassElements = {};
+  Map<int, ClassElement> visitedPublicAnnotatedClassElements = {};
+  Map<int, EnumElement> visitedPublicAnnotatedEnumElements = {};
   Map<String, LibraryElement?> visitedLibraries = {};
 
   final _annotationClassName = jsonSerializable.runtimeType.toString();
@@ -17,20 +17,15 @@ class LibraryVisitor extends RecursiveElementVisitor {
   List<InterfaceElement> get visitedPublicAnnotatedElements {
     return [
       ...visitedPublicAnnotatedClassElements.values,
-      ...visitedPublicAnnotatedEnumElements.values
+      ...visitedPublicAnnotatedEnumElements.values,
     ];
   }
 
-  @override
-  void visitLibraryExportElement(LibraryExportElement element) {
-    _visitLibrary(element.exportedLibrary);
-    super.visitLibraryExportElement(element);
-  }
-
-  @override
-  void visitLibraryImportElement(LibraryImportElement element) {
-    _visitLibrary(element.importedLibrary);
-    super.visitLibraryImportElement(element);
+  bool _isJsonSerializable(Element element) {
+    return element.metadata.annotations.any((meta) {
+      final value = meta.computeConstantValue();
+      return value?.type?.getDisplayString() == _annotationClassName;
+    });
   }
 
   @override
@@ -38,12 +33,11 @@ class LibraryVisitor extends RecursiveElementVisitor {
     if (!element.isPrivate &&
         !visitedPublicClassElements.containsKey(element.id)) {
       visitedPublicClassElements.putIfAbsent(element.id, () => element);
-      if (element.metadata.isNotEmpty &&
-          element.metadata.any((meta) =>
-              meta.computeConstantValue()!.type!.getDisplayString() ==
-              _annotationClassName)) {
+      if (_isJsonSerializable(element)) {
         visitedPublicAnnotatedClassElements.putIfAbsent(
-            element.id, () => element);
+          element.id,
+          () => element,
+        );
       }
     }
     super.visitClassElement(element);
@@ -54,15 +48,27 @@ class LibraryVisitor extends RecursiveElementVisitor {
     if (!element.isPrivate &&
         !visitedPublicAnnotatedEnumElements.containsKey(element.id)) {
       visitedPublicAnnotatedEnumElements.putIfAbsent(element.id, () => element);
-      if (element.metadata.isNotEmpty &&
-          element.metadata.any((meta) =>
-              meta.computeConstantValue()!.type!.getDisplayString() ==
-              _annotationClassName)) {
+      if (_isJsonSerializable(element)) {
         visitedPublicAnnotatedEnumElements.putIfAbsent(
-            element.id, () => element);
+          element.id,
+          () => element,
+        );
       }
     }
     super.visitEnumElement(element);
+  }
+
+  @override
+  void visitLibraryElement(LibraryElement element) {
+    for (final fragment in element.fragments) {
+      for (final export in fragment.libraryExports) {
+        _visitLibrary(export.exportedLibrary);
+      }
+      for (final import in fragment.libraryImports) {
+        _visitLibrary(import.importedLibrary);
+      }
+    }
+    super.visitLibraryElement(element);
   }
 
   void _visitLibrary(LibraryElement? element) {
@@ -72,7 +78,9 @@ class LibraryVisitor extends RecursiveElementVisitor {
         (identifier.startsWith('asset:') ||
             identifier.startsWith(packageName!))) {
       visitedLibraries.putIfAbsent(identifier, () => element);
-      element!.visitChildren(this);
+      element!.accept(this);
     }
   }
+
+  void visitLibrary(LibraryElement? element) => _visitLibrary(element);
 }
