@@ -214,8 +214,15 @@ class JsonMapper {
 
   void _updateInternalMaps() {
     _clearCachesAndMaps();
-    _populateMapsFromReflection();
+    _populateClassesAndDiscriminators();
+    // Has to happen before _populateMixins(): that walks type info through
+    // TypeInfoHandler.getTypeInfo(), which only initializes TypeInfo's `late`
+    // fields by running the registered typeInfoDecorators. With no decorators
+    // registered yet, reading TypeInfo.isWithMixin throws
+    // LateInitializationError. _populateClassesAndDiscriminators() still runs
+    // first, since valueDecorators are merged with the inline ones it collects.
     _updateMapsFromAdapters();
+    _populateMixins();
   }
 
   void _clearCachesAndMaps() {
@@ -225,11 +232,6 @@ class JsonMapper {
     classes.clear();
     mixins.clear();
     inlineValueDecorators.clear();
-  }
-
-  void _populateMapsFromReflection() {
-    _populateClassesAndDiscriminators();
-    _populateMixins();
   }
 
   void _populateClassesAndDiscriminators() {
